@@ -19,6 +19,40 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
+<script>
+	// 클라이언트 화면에서 사용(회원가입 페이지)
+	// ajax 통신은 페이지가 바뀌지 않는다.
+	
+	function checkUserIdExist(){
+		
+		var user_id = $("#user_id").val()  //사용자가 입력한 아이디값 가져오기.
+		
+		if(user_id.length == 0){
+			alert("아이디를 입력해주세용 ^^*")
+			return
+		}
+		
+		$.ajax({
+			url : '${root}user/checkUserIdExist/' + user_id,
+			type : 'get',
+			dataType : 'text',
+			success : function(result){
+				if(result.trim() == 'true'){
+					alert('사용할 수 있는 아이디 입니다!')
+					$("#UserIdExist").val('true')
+				} else {
+					alert('사용할 수 없는 아이디 입니다 ㅠㅠ')
+					$("#UserIdExist").val('false')
+				}
+			}
+		})
+	}
+	
+	function resetUserIdExist(){
+		$("#userIdExist").val('false')
+	}
+
+</script>
 <body>
 
 	<c:import url="/WEB-INF/views/include/top_menu.jsp" />
@@ -31,21 +65,22 @@
 					<div class="card-body">
 						<form:form action="${root }user/join_pro" method="post"
 							modelAttribute="joinUserBean">
+							<form:hidden path="userIdExist"/>
 							<div class="form-group">
 								<form:label path="user_name">이름</form:label>
 								<form:input path="user_name" class="form-control" />
 								<form:errors path="user_name" style="color:red"/>
 							</div>
 							<div class="form-group">
-								<form:label path="user_id">아이디</form:label>
-								<div class="input-group">
-									<form:input path="user_id" class="form-control" />
-									<div class="input-group-append">
-										<button type="button" class="btn btn-primary">중복확인</button>
-									</div>
+							<form:label path="user_id">아이디</form:label>
+							<div class="input-group">
+								<form:input path="user_id" class='form-control' onkeypress="resetUserIdExist()"/>
+								<div class="input-group-append">
+									<button type="button" class="btn btn-primary" onclick='checkUserIdExist()'>중복확인</button>
 								</div>
-								<form:errors path="user_id" style="color:red"/>
 							</div>
+							<form:errors path="user_id" style='color:red'/>
+						</div>
 							<div class="form-group">
 								<form:label path="user_pw">비밀번호</form:label>								
 								<form:password path="user_pw" class='form-control'/>

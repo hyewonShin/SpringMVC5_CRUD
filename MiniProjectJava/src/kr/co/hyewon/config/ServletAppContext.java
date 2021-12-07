@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyEmitter
 import kr.co.hyewon.interceptor.TopMenuInterceptor;
 import kr.co.hyewon.mapper.BoardMapper;
 import kr.co.hyewon.mapper.TopMenuMapper;
+import kr.co.hyewon.mapper.UserMapper;
 import kr.co.hyewon.service.TopMenuService;
 
 // Spring MVC 프로젝트에 관련된 설정을 하는 클래스
@@ -104,6 +105,15 @@ public class ServletAppContext implements WebMvcConfigurer{
 		factoryBean.setSqlSessionFactory(factory);
 		return factoryBean;
 	}
+
+	@Bean
+	public MapperFactoryBean<UserMapper> getUserMapper(SqlSessionFactory factory) throws Exception{
+		MapperFactoryBean<UserMapper> factoryBean = new MapperFactoryBean<UserMapper>(UserMapper.class);
+		factoryBean.setSqlSessionFactory(factory);
+		return factoryBean;
+	}
+	
+	
 
 	// 인터셉터 등록
 	@Override
