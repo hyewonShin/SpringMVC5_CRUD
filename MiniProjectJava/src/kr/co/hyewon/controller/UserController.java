@@ -34,11 +34,11 @@ public class UserController {
 						@RequestParam(value = "fail", defaultValue = "false") boolean fail,
 						Model model) {
 		
-		model.addAttribute("fail",fail);
-		
+		model.addAttribute("fail", fail);
+	
 		return "user/login";
 	}
-
+	
 	@PostMapping("/login_pro")
 	public String login_pro(@Valid @ModelAttribute("temploginUserBean") UserBean temploginUserBean, BindingResult result) {
 		
@@ -70,22 +70,23 @@ public class UserController {
 		
 		return "user/join_success";
 	}
-
+	
 	@GetMapping("/modify")
 	public String modify() {
 		return "user/modify";
 	}
-
+	
 	@GetMapping("/logout")
 	public String logout() {
+		
+		loginUserBean.setUserLogin(false);
+		
 		return "user/logout";
 	}
 	
-	// UserValidator 등록 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		UserValidator validator1 = new UserValidator();
 		binder.addValidators(validator1);
 	}
-	
 }

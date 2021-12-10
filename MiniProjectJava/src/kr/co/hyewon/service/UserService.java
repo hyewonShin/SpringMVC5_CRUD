@@ -38,8 +38,8 @@ public class UserService {
 		
 		if(temploginUserBean2 != null) {  //로그인 성공 시
 			loginUserBean.setUser_idx(temploginUserBean2.getUser_idx());
-			loginUserBean.setUser_idx(temploginUserBean2.getUser_idx());
-			loginUserBean.setUserLogin(true); // 로으인 되있는 것
+			loginUserBean.setUser_name(temploginUserBean2.getUser_name());
+			loginUserBean.setUserLogin(true); // 로그인 되있는 것
 		}
 	}
 }

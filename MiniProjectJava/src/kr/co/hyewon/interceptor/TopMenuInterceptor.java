@@ -9,29 +9,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import kr.co.hyewon.beans.BoardInfoBean;
+import kr.co.hyewon.beans.UserBean;
 import kr.co.hyewon.service.TopMenuService;
 
 public class TopMenuInterceptor implements HandlerInterceptor{
 
-	//@Autowired
-	//private TopMenuService topMenuService;
-	
-	// interceptor에서는 자동주입 받지 못하기 때문에,생성자를 이용해서 Bean을 주입받는다.
-
 	private TopMenuService topMenuService;
+	private UserBean loginUserBean;
 	
-	public TopMenuInterceptor(TopMenuService topMenuService) {
+	public TopMenuInterceptor(TopMenuService topMenuService, UserBean loginUserBean) {
 		this.topMenuService = topMenuService;
+		this.loginUserBean = loginUserBean;
 	}
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-
+		// TODO Auto-generated method stub
 		List<BoardInfoBean> topMenuList = topMenuService.getTopMenuList();
 		request.setAttribute("topMenuList", topMenuList);
+		request.setAttribute("loginUserBean", loginUserBean);
 		
 		return true;
 	}
-	
 }
