@@ -42,4 +42,21 @@ public class UserService {
 			loginUserBean.setUserLogin(true); // 로그인 되있는 것
 		}
 	}
+	
+	public void getModifyUserInfo(UserBean modifyUserBean) {
+		UserBean tempModifyUserBean = userDao.getModifyUserInfo(loginUserBean.getUser_idx());
+		
+		modifyUserBean.setUser_id(tempModifyUserBean.getUser_id());
+		modifyUserBean.setUser_name(tempModifyUserBean.getUser_name());
+		modifyUserBean.setUser_idx(loginUserBean.getUser_idx());
+		
+	}
+	
+	public void modifyUserInfo(UserBean modifyUserBean) {
+		
+		// 현재 로그인한 사람의 index 번호
+		modifyUserBean.setUser_idx(loginUserBean.getUser_idx());
+		
+		userDao.modifyUserInfo(modifyUserBean);
+	}
 }

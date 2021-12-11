@@ -25,12 +25,15 @@ public class UserValidator implements org.springframework.validation.Validator{
 		//System.out.println(beanName);
 
 		// 비밀번호 확인 유효성 검사 
-		// 에러난 부분이 회원가입 일 경우에만 비밀번호 확인 유효성 검사하도록 설정.
-		if(beanName.equals("joinUserBean")) {
+		// 회원가입이나 회원정보수정의 경우에만  비밀번호 확인 유효성 검사하도록 설정.
+		if(beanName.equals("joinUserBean") || beanName.equals("modifyUserBean")) {
 			if(userBean.getUser_pw().equals(userBean.getUser_pw2()) == false) {
 				errors.rejectValue("user_pw", "NotEquals");
 				errors.rejectValue("user_pw2", "NotEquals");
 			}
+		}
+
+		if(beanName.equals("joinUserBean")) {
 
 			if(userBean.isUserIdExist() == false) {
 				errors.rejectValue("user_id", "DontCheckUserIdExist");

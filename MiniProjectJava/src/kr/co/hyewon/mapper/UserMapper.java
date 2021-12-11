@@ -2,6 +2,7 @@ package kr.co.hyewon.mapper;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.co.hyewon.beans.UserBean;
 
@@ -26,5 +27,17 @@ public interface UserMapper {
 			"from user_table " + 
 			"where user_id = #{user_id} and user_pw=#{user_pw}")
 	UserBean getLoginUserInfo(UserBean temploginUserBean);
+	
+	// 정보수정 화면에서 user_id, user_name 출력. 
+	@Select("select user_id, user_name " +
+			"from user_table " +
+			"where user_idx = #{user_idx}")
+	UserBean getModifyUserInfo(int user_idx);
+	
+	// 정보수정(데이터)
+	@Update("update user_table " +
+			"set user_pw =#{user_pw} " +
+			"where user_idx = #{user_idx}")
+	void modifyUserInfo(UserBean modifyUserBean);
 	
 }
