@@ -1,11 +1,17 @@
 package kr.co.hyewon.beans;
 
-public class ContentBean {
+import javax.validation.constraints.NotBlank;
 
+public class ContentBean {
 	private int content_idx;
+	
+	@NotBlank
 	private String content_subject;
+	
+	@NotBlank
 	private String content_text;
-	private String content;
+	
+	private String content_file;
 	private int content_writer_idx;
 	private int content_board_idx;
 	private String content_date;
@@ -28,11 +34,11 @@ public class ContentBean {
 	public void setContent_text(String content_text) {
 		this.content_text = content_text;
 	}
-	public String getContent() {
-		return content;
+	public String getContent_file() {
+		return content_file;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setContent_file(String content_file) {
+		this.content_file = content_file;
 	}
 	public int getContent_writer_idx() {
 		return content_writer_idx;
@@ -52,7 +58,6 @@ public class ContentBean {
 	public void setContent_date(String content_date) {
 		this.content_date = content_date;
 	}
-	
 	
 	
 }
