@@ -1,6 +1,7 @@
 package kr.co.hyewon.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +16,9 @@ public class HomeController {
 //	private UserBean loginUserBean;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home() {
+	public String home(HttpServletRequest request) {
 		
+		//System.out.println(request.getServletContext().getRealPath("/"));
 //		System.out.println(loginUserBean);
 		
 		return "redirect:/main";
