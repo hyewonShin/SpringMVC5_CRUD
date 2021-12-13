@@ -1,5 +1,7 @@
 package kr.co.hyewon.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
+	private Object contetnList;
 	
 	// TopMenuMapper -> TopMenuInterceptor 에서 board_info_idx를 사용해서 여기에서도 사용 가능하다.
 	@GetMapping("/main")
@@ -28,6 +31,12 @@ public class BoardController {
 					   Model model) {
 		
 		model.addAttribute("board_info_idx", board_info_idx);
+		
+		String boardInfoName = boardService.getBoardInfoName(board_info_idx);
+		model.addAttribute("boardInfoName", boardInfoName);
+		
+		List<ContentBean> contentList = boardService.getContentList(board_info_idx);
+		model.addAttribute("contentList",contentList);
 		
 		return "board/main";
 	}
