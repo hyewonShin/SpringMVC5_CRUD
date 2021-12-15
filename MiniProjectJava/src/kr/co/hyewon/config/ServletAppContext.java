@@ -163,7 +163,7 @@ public class ServletAppContext implements WebMvcConfigurer{
 	}
 	
 	@Bean
-	StandardServletMultipartResolver multipartResolver() {
+	public StandardServletMultipartResolver multipartResolver() {
 		return new StandardServletMultipartResolver();
 	}
 }
